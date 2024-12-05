@@ -3,12 +3,15 @@
 layout: home
 
 hero:
-  name: "EPG doc"
-  text: "文库"
-  tagline: My great project tagline
+  name: "EPG"
+  text: "知识库"
+  tagline: 日常积累
+  image:
+    src: /EPG.png
+    alt: EpgPress
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: 快速开始
       link: /markdown-examples
     - theme: alt
       text: API Examples

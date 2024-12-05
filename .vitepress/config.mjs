@@ -1,13 +1,15 @@
 import { defineConfig } from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
+// https://vitepress.dev/reference  /site-config
 export default defineConfig({
-  title: "EPG doc",
-  description: "文库",
+  title: "EPG",
+  titleTemplate: "知识库",
+  description: "知识库",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/EPG.png',
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern: 'https://github.com/lizhixu/zepg/edit/main/:path',
       text: 'Edit this page on GitHub'
     },
     lastUpdated: {
@@ -22,7 +24,7 @@ export default defineConfig({
       { text: 'Examples', link: '/markdown-examples' }
     ],
 
-    sidebar: [  
+    sidebar: [
       {
         text: 'Examples',
         items: [
@@ -33,7 +35,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/lizhixu/zepg' }
     ]
   }
 })
