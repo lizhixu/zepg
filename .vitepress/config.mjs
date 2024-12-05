@@ -5,6 +5,7 @@ export default defineConfig({
   title: "EPG",
   titleTemplate: "知识库",
   description: "知识库",
+  base: './',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/EPG.png',
