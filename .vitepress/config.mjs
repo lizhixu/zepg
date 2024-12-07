@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference  /site-config
 export default defineConfig({
-  title: "EPG",
+  title: "ZEPG",
   titleTemplate: "知识库",
   description: "知识库",
   themeConfig: {

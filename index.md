@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "EPG"
+  name: "ZEPG"
   text: "知识库"
   tagline: 日常积累
   image:
