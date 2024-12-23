@@ -42,6 +42,12 @@ export default defineConfig({
                         ]
                     },
                 ]
+            },
+            {
+                text: 'ADB 相关',
+                items: [
+                    {text: '各厂家开启 ADB 的方法', link: '/adb/各厂家开启ADB的方法'},
+                ]
             }
         ],
 
