@@ -12,6 +12,12 @@ export default defineConfig({
             pattern: 'https://github.com/lizhixu/zepg/edit/main/:path',
             text: 'Edit this page on GitHub'
         },
+        search: {
+          provider: 'local'
+        },
+        outline: {
+            level: [2, 4]
+        },
         lastUpdated: {
             text: 'Updated at',
             formatOptions: {
@@ -47,6 +53,7 @@ export default defineConfig({
                 text: 'ADB 相关',
                 items: [
                     {text: '各厂家开启 ADB 的方法', link: '/adb/各厂家开启ADB的方法'},
+                    {collapsed: true, text: 'ADB 操作命令详解及用法大全', link: '/adb/ADB 操作命令详解及用法大全'},
                 ]
             }
         ],
