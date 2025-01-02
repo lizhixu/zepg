@@ -13,16 +13,13 @@ hero:
     - theme: brand
       text: 快速开始
       link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 快速入门
+    details: 通过简单的步骤和示例，帮助你快速上手并掌握基本概念
+  - title: 减少踩坑
+    details: 提供常见问题和解决方案，帮助你避免常见的陷阱和错误
+  - title: 知识沉淀
+    details: 通过系统化的知识整理和归纳，帮助你更好地沉淀和积累知识
 ---
 
