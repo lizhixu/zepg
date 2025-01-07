@@ -34,8 +34,9 @@ export default defineConfig({
             {
                 text: '基础',
                 items: [
-                    {text: 'Markdown Examples', link: '/markdown-examples'},
-                    {text: 'Runtime API Examples', link: '/api-examples'}
+                    {text: '快速开始', link: '/basis/快速开始'},
+                    {text: 'Sepg 框架说明', link: 'https://wangcb.surge.sh/'},
+                    {text: 'Xepg 框架说明', link: '/basis/Xepg 框架说明'},
                 ]
             },
             {
