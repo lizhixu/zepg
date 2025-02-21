@@ -46,6 +46,7 @@ export default defineConfig({
                         text: '移动',
                         items: [
                             {text: '3.0 vue 注意事项', link: '/cmcc/3.0 vue 注意事项'},
+                            {text: '中兴 3.0 图片属性对照表', link: '/cmcc/中兴 3.0 图片属性对照表'},
                         ]
                     },
                 ]
