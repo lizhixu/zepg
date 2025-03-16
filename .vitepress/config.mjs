@@ -17,7 +17,7 @@ export default defineConfig({
         },
         sitemap: {
           hostname: 'https://zepg.115113.xyz'
-        }
+        },
         outline: {
             level: [2, 4]
         },
