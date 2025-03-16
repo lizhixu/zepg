@@ -15,6 +15,9 @@ export default defineConfig({
         search: {
           provider: 'local'
         },
+        sitemap: {
+          hostname: 'https://zepg.115113.xyz'
+        }
         outline: {
             level: [2, 4]
         },
