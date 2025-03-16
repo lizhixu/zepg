@@ -5,6 +5,9 @@ export default defineConfig({
     title: "ZEPG",
     titleTemplate: "知识库",
     description: "知识库",
+    sitemap: {
+        hostname: 'https://zepg.115113.xyz'
+    },
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         logo: '/EPG.png',
@@ -14,9 +17,6 @@ export default defineConfig({
         },
         search: {
           provider: 'local'
-        },
-        sitemap: {
-          hostname: 'https://zepg.115113.xyz'
         },
         outline: {
             level: [2, 4]
