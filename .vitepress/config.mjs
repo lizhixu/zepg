@@ -19,7 +19,8 @@ export default defineConfig({
           provider: 'local'
         },
         outline: {
-            level: [2, 4]
+            level: [2, 4],
+            label: '页面导航'
         },
         lastUpdated: {
             text: 'Updated at',
