@@ -1,6 +1,6 @@
 # .github/workflows/ftp.yml
 
-name: main
+name: ftp
 
 # 在main分支发生push事件时触发。
 on:
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
-          cache: "yarn"
+          cache: "pnpm"
 
         # 构建
       - name: Build
