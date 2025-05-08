@@ -41,8 +41,8 @@ export default defineConfig({
                     items: [
                         {text: '快速开始', link: '/docs/basis/快速开始'},
                         {text: 'Sepg 框架说明', link: 'https://wangcb.surge.sh/'},
-                        {text: 'XEpg API 文档', link: '/docs/basis/XEpg API 文档'},
-                        {text: 'Xepg 框架说明', link: '/docs/basis/Xepg 框架说明'},
+                        {text: 'XEpg 速查表', link: '/docs/basis/XEpg 速查表'},
+                        {text: 'XEpg 框架详细使用说明', link: '/docs/basis/XEpg 框架详细使用说明'},
                     ]
                 },
                 {
