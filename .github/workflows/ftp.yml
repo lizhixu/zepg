@@ -31,8 +31,8 @@ jobs:
         # 构建
       - name: Build
         run: |
-          yarn install
-          yarn build
+          pnpm install
+          pnpm run docs:build
         # 同步到又拍云
       - name: Deploy ftp
         uses: airvzxf/ftp-deployment-action@latest
@@ -40,4 +40,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "./domains/zepg.dev.tc/public_html"
+          local_dir: ".vitepress/dist"
+          remote_dir: "/domains/zepg.dev.tc/public_html"
