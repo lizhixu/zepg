@@ -22,17 +22,17 @@ jobs:
 
         # 安装 node
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
-          cache: "npm"
+          cache: "pnpm"
 
         # 构建
       - name: Build
         run: |
-          npm install
-          npm run docs:build
+          pnpm install
+          pnpm run docs:build
         # 同步到又拍云
       - name: Deploy ftp
         uses: airvzxf/ftp-deployment-action@latest
