@@ -26,13 +26,13 @@ jobs:
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
+          cache: "npm"
 
         # 构建
       - name: Build
         run: |
-          pnpm install
-          pnpm run docs:build
+          npm install
+          npm run docs:build
         # 同步到又拍云
       - name: Deploy ftp
         uses: airvzxf/ftp-deployment-action@latest
