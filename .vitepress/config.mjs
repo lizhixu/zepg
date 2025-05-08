@@ -37,9 +37,10 @@ export default defineConfig({
             {
                 text: '基础',
                 items: [
-                    {text: '快速开始', link: '/basis/快速开始'},
+                    {text: '快速开始', link: '/docs/basis/快速开始'},
                     {text: 'Sepg 框架说明', link: 'https://wangcb.surge.sh/'},
-                    {text: 'Xepg 框架说明', link: '/basis/Xepg 框架说明'},
+                    {text: 'Xepg 框架说明', link: '/docs/basis/Xepg 框架说明'},
+                    {text: 'XEpg API 文档', link: '/docs/basis/XEpg API 文档'},
                 ]
             },
             {
@@ -48,8 +49,8 @@ export default defineConfig({
                     {
                         text: '移动',
                         items: [
-                            {text: '3.0 vue 注意事项', link: '/cmcc/3.0 vue 注意事项'},
-                            {text: '中兴 3.0 图片属性对照表', link: '/cmcc/中兴 3.0 图片属性对照表'},
+                            {text: '3.0 vue 注意事项', link: '/docs/cmcc/3.0 vue 注意事项'},
+                            {text: '中兴 3.0 图片属性对照表', link: '/docs/cmcc/中兴 3.0 图片属性对照表'},
                         ]
                     },
                 ]
@@ -57,8 +58,8 @@ export default defineConfig({
             {
                 text: 'ADB 相关',
                 items: [
-                    {text: '各厂家开启 ADB 的方法', link: '/adb/各厂家开启ADB的方法'},
-                    {collapsed: true, text: 'ADB 操作命令详解及用法大全', link: '/adb/ADB 操作命令详解及用法大全'},
+                    {text: '各厂家开启 ADB 的方法', link: '/docs/adb/各厂家开启ADB的方法'},
+                    {collapsed: true, text: 'ADB 操作命令详解及用法大全', link: '/docs/adb/ADB 操作命令详解及用法大全'},
                 ]
             }
         ],

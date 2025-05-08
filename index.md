@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /basis/快速开始
+      link: /docs/basis/快速开始
 
 features:
   - title: 快速入门
