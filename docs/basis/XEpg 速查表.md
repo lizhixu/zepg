@@ -1,4 +1,4 @@
-# XEpg API 文档
+# XEpg 速查表
 
 本文档概述了 XEpg JavaScript 库的主要组件和功能，该库专为管理交互式用户界面元素、导航和实用工具函数设计，特别适用于 IPTV 或类似机顶盒环境。库中包括处理区域（`AreaClass`）、元素（`EleClass`）、导航（`NavObj`）和实用工具（`UtilObj`）的类，以及 Base64 编解码和 MD5 哈希功能。
 
