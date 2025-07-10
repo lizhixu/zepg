@@ -6,7 +6,7 @@ export default defineConfig({
     titleTemplate: "知识库",
     description: "知识库",
     sitemap: {
-        hostname: 'https://zepg.115113.xyz'
+        hostname: 'https://zepg.dev.tc'
     },
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
