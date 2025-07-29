@@ -43,7 +43,7 @@ export default defineConfig({
                         {text: 'Sepg 框架说明', link: 'https://wangcb.surge.sh/'},
                         {text: 'XEpg 速查表', link: '/docs/basis/XEpg 速查表'},
                         {text: 'XEpg 框架详细使用说明', link: '/docs/basis/XEpg 框架详细使用说明'},
-                        {text: '使用transform: translate时出现闪烁现象如何解决', link: '/docs/basis/使用transform: translate时出现闪烁现象如何解决'},
+                        {text: '使用 transform 时出现闪烁现象如何解决', link: '/docs/basis/使用 transform 时出现闪烁现象如何解决'},
                     ]
                 },
                 {
