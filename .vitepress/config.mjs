@@ -40,7 +40,7 @@ export default defineConfig({
                     text: '基础',
                     items: [
                         {text: '快速开始', link: '/docs/basis/快速开始'},
-                        {text: 'Git使用规范手册', link: '/docs/basis/Git使用规范手册'},
+                        {text: 'Git 使用规范手册', link: '/docs/basis/Git 使用规范手册'},
                         {text: 'Sepg 框架说明', link: 'https://wangcb.surge.sh/'},
                         {text: 'XEpg 速查表', link: '/docs/basis/XEpg 速查表'},
                         {text: 'XEpg 框架详细使用说明', link: '/docs/basis/XEpg 框架详细使用说明'},
