@@ -45,4 +45,4 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local_dir: ".vitepress/dist"
-          remote_dir: "/usr/home/wxuns/domains/zepg.dev.tc/public_html"
+          remote_dir: "/domains/zepg.dev.tc/public_html"
