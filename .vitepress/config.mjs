@@ -8,6 +8,7 @@ export default defineConfig({
     sitemap: {
         hostname: 'https://zepg.dev.tc'
     },
+    lastUpdated: true,
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         logo: '/EPG.png',
