@@ -19,6 +19,8 @@ jobs:
       # 检出
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 
 
         # 安装 pnpm
       - uses: pnpm/action-setup@v4
