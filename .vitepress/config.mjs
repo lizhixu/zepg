@@ -55,6 +55,7 @@ export default defineConfig({
                             text: '移动',
                             items: [
                                 {text: '3.0 vue 注意事项', link: '/docs/cmcc/3.0 vue 注意事项'},
+                                {text: '3.0 语音控制系统文档', link: '/docs/cmcc/3.0 语音控制系统文档'},
                                 {text: '中兴 3.0 图片属性对照表', link: '/docs/cmcc/中兴 3.0 图片属性对照表'},
                                 {text: '华为 3.0 图片属性对照表', link: '/docs/cmcc/华为 3.0 图片属性对照表'},
                             ]
