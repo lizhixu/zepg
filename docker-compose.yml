@@ -1,0 +1,9 @@
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zepg-docs
+    ports:
+      - "38173:80"
+    restart: unless-stopped
