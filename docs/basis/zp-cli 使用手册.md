@@ -215,7 +215,7 @@ zp-cli up ./dist -s hw -r /home/www
 zp-cli up ./dist/index.html ./dist/config.js ./dist/assets
 
 # 多文件在同一服务器同一远程目录时，会自动合并为一次 SSH 连接和一个 tar.gz 包上传
-zp-cli up .\iflytek\ .\iflytek-others\
+zp-cli up .\page\ .\js\
 ```
 
 ### Windows 右键菜单
@@ -242,7 +242,7 @@ zp-cli uninstall menu
 多选上传时，右键脚本会先收集 Explorer 传入的路径，再转换为类似下面的命令执行：
 
 ```powershell
-zp-cli up .\iflytek .\iflytek-others
+zp-cli up .\page\ .\js\
 ```
 
 > 注意：Windows 11 的新版右键菜单会折叠传统注册表菜单项，可能需要点击「显示更多选项」或按住 Shift 右键查看。
@@ -289,6 +289,7 @@ zp-cli s restore backup_20260710_120000.json
 配置文件路径：`~/.zp-cli.json`
 
 ### 配置文件结构
+> 初始化后可以直接替换 `syncService` 为 `InN5bmNTZXJ2aWNlIjogewogICAgInVybCI6ICJodHRwOi8venAtY2xpLmxpemhpeHUuY24vYXBpLnBocCIsCiAgICAiYXBpUGFzc3dvcmQiOiAiaXB0djIwMjYtYXBpIgogIH0=` (base64解密)
 
 ```jsonc
 {
