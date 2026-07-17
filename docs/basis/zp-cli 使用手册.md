@@ -289,7 +289,7 @@ zp-cli s restore backup_20260710_120000.json
 配置文件路径：`~/.zp-cli.json`
 
 ### 配置文件结构
-> 初始化后可以直接替换 `syncService` 为 `InN5bmNTZXJ2aWNlIjogewogICAgInVybCI6ICJodHRwOi8venAtY2xpLmxpemhpeHUuY24vYXBpLnBocCIsCiAgICAiYXBpUGFzc3dvcmQiOiAiaXB0djIwMjYtYXBpIgogIH0=` (base64解密)
+> 初始化后可以直接替换 `syncService` 为 `InN5bmNTZXJ2aWNlIjogewogICAgInVybCI6ICJodHRwOi8venAtY2xpLmxpemhpeHUuY24vYXBpLnBocCIsCiAgICAiYXBpUGFzc3dvcmQiOiAiaXB0djIwMjYtYXBpIgogIH0=` (需要base64解密)
 
 ```jsonc
 {
