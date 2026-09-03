@@ -10,12 +10,16 @@
 2. [安装方法](#安装方法)
 3. [快速上手](#快速上手)
 4. [命令详解](#命令详解)
-5. [配置文件说明](#配置文件说明)
-6. [子目录映射功能](#子目录映射功能)
-7. [同步服务功能](#同步服务功能)
-8. [部署流程说明](#部署流程说明)
-9. [常见问题解答](#常见问题解答)
-10. [项目结构](#项目结构)
+5. [VS Code 扩展使用指南](#vs-code-扩展使用指南)
+6. [WebStorm 外部工具集成](#webstorm-外部工具集成)
+7. [Windows 资源管理器右键](#windows-资源管理器右键)
+8. [sync 命令详解](#sync-命令详解)
+9. [配置文件说明](#配置文件说明)
+10. [子目录映射功能](#子目录映射功能)
+11. [同步服务功能](#同步服务功能)
+12. [部署流程说明](#部署流程说明)
+13. [常见问题解答](#常见问题解答)
+14. [项目结构](#项目结构)
 
 ---
 
@@ -27,20 +31,23 @@
 
 | 特性 | 说明 |
 |------|------|
-| **Git 仓库自动感知** | 通过读取当前仓库的 origin URL 自动匹配部署配置，无需每次手动指定 |
+| **Git 仓库自动感知** | 通过读取当前仓库的 origin URL 自动匹配部署配置，支持跨目录精准识别，无需每次手动指定 |
 | **灵活的子目录映射** | 支持 monorepo 场景，同一仓库的不同子目录可部署到不同服务器 |
 | **多目标部署** | 同一子目录可配置多个部署目标，未指定时默认使用第一条并提示，可通过 `--server` 参数选择 |
 | **多文件上传** | 支持 `zp-cli up file1 file2` 一次上传多个文件，同服务器同目录自动合并为一次 SSH 连接和一个 tar.gz 包 |
-| **Windows 右键上传** | 支持安装资源管理器右键菜单，多选文件可合并到一个终端中执行上传 |
+| **VS Code 官方扩展** | 原生扩展插件，支持资源管理器多选右键、原生顶部下拉弹窗选择服务器、Output 面板实时查看日志 |
+| **WebStorm 外部工具** | 支持自动探测配置目录，按服务器生成右键子菜单与自动匹配项，Run 控制台查看日志 |
+| **Windows 右键上传** | 支持安装文件资源管理器右键菜单，多选文件可合并到一个终端中执行上传 |
 | **跨平台兼容** | 使用 npm tar 包而非系统 tar 命令，完美支持 Windows |
-| **配置同步** | 通过独立的 PHP 后端实现配置文件多端同步，支持历史版本管理 |
+| **配置安全同步** | 通过独立 PHP 后端实现多端同步与历史版本管理；`push`/`restore` 具备密码二次确认防误操作机制 |
 | **提权部署** | 支持通过 expect 脚本自动执行 `su root`，适合需要 root 权限的环境 |
 
 ### 技术栈
 
 - **运行环境**: Node.js >= 14.0.0
-- **当前版本**: 0.0.5
-- **核心依赖**: commander (命令行)、node-ssh (SSH 连接)、tar (打包)、chalk (终端美化)
+- **当前版本**: 0.0.9
+- **核心依赖**: commander (命令行)、node-ssh (SSH 连接)、tar (打包)、chalk (终端美化)、inquirer (交互输入)
+- **IDE 扩展**: VS Code 官方 Extension (`.vsix`)、WebStorm External Tools XML 集成
 - **后端服务**: PHP (配置同步服务)
 
 ---
@@ -88,7 +95,7 @@ npm unlink -g zp-cli
 
 ```bash
 zp-cli --version
-# 输出: 0.0.5
+# 输出: 0.0.9
 ```
 
 ### 升级到最新版本
@@ -96,6 +103,8 @@ zp-cli --version
 ```bash
 npm update -g @wxuns/zp-cli
 ```
+
+> 同时建议 `zp-cli s pull` 
 
 ### 卸载
 
@@ -169,9 +178,13 @@ zp-cli up ./dist/index.html ./dist/assets ./dist/config.js
 |------|------|------|
 | `zp-cli init` | `zp-cli i` | 生成 demo 配置文件 |
 | `zp-cli upload <路径...>` | `zp-cli up <路径...>` | 上传一个或多个文件/目录到远程服务器 |
-| `zp-cli install menu` | - | 安装 Windows 右键上传菜单 |
-| `zp-cli uninstall menu` | - | 卸载 Windows 右键上传菜单 |
-| `zp-cli sync <操作>` | `zp-cli s <操作>` | 管理配置文件的远程同步 |
+| `zp-cli install vscode` | - | 安装 VS Code 官方右键上传扩展 |
+| `zp-cli uninstall vscode` | - | 卸载 VS Code 扩展 |
+| `zp-cli install webstorm` | - | 安装 WebStorm 外部工具右键上传菜单 |
+| `zp-cli uninstall webstorm` | - | 卸载 WebStorm 外部工具集成 |
+| `zp-cli install menu` | - | 安装 Windows 文件资源管理器右键菜单 |
+| `zp-cli uninstall menu` | - | 卸载 Windows 文件资源管理器右键菜单 |
+| `zp-cli sync <操作>` | `zp-cli s <操作>` | 管理配置文件的远程同步（支持 `-y` 跳过密码确认） |
 | `zp-cli config show` | `zp-cli c show` | 查看当前配置内容 |
 | `zp-cli config path` | `zp-cli c path` | 显示配置文件路径 |
 | `zp-cli --help` | - | 查看帮助信息 |
@@ -218,25 +231,105 @@ zp-cli up ./dist/index.html ./dist/config.js ./dist/assets
 zp-cli up .\page\ .\js\
 ```
 
-### Windows 右键菜单
+---
 
-v0.0.5 起支持在 Windows 资源管理器中安装右键上传菜单，需要管理员权限。
+## VS Code 扩展使用指南
+
+v0.0.7 起提供官方 VS Code 扩展（`zp-cli-vscode`），支持直接在编辑器和文件树右键完成部署。
+
+### 1. 安装与卸载
 
 ```bash
-# 安装右键菜单
+# 一键安装扩展（自动检测 code 命令并静默安装）
+zp-cli install vscode
+
+# 若使用的是 VS Code Insiders 版
+zp-cli install vscode --insiders
+
+# 指定自定义扩展目录安装
+zp-cli install vscode -e "D:\custom\vscode\extensions"
+
+# 卸载扩展
+zp-cli uninstall vscode
+```
+
+> 💡 **提示**：安装后无需重启 VS Code；若窗口已在运行，按 `Ctrl+Shift+P` 执行「**开发人员: 重载窗口 (Developer: Reload Window)**」即可立即加载。
+>
+> VS Code 系列编辑器（*TRAE*，*Cursor* 等），可自行下载 vsix 扩展自行导入即可，下载地址：[Github官方源](https://github.com/lizhixu/zp-cli/raw/refs/heads/main/vscode-extension/zp-cli-vscode.vsix) ，[加速地址](https://v4.gh-proxy.org/https://github.com/lizhixu/zp-cli/raw/refs/heads/main/vscode-extension/zp-cli-vscode.vsix) 
+
+### 2. 右键功能说明
+
+在 VS Code 资源管理器（文件树）或当前编辑器内右键，即可看到以下菜单项：
+
+| 菜单项 | 功能说明 | 适用场景 |
+|--------|----------|----------|
+| **zp-cli: 自动匹配上传** | 根据当前文件所在 Git 仓库的远程地址自动匹配 `~/.zp-cli.json` 规则并上传 | 日常快速单文件/多文件修改部署 |
+| **zp-cli: 选择服务器上传...** | 弹出 VS Code 原生顶部下拉选择框，实时读取配置中的服务器列表供选择，选定后上传 | 部署到测试服/生产服等指定环境 |
+| **zp-cli: 打开配置文件 (~/.zp-cli.json)** | 快速在 VS Code 编辑器内打开全局配置文件 | 随时调整服务器与映射参数 |
+
+### 3. 多选与实时日志优势
+
+- **多选批量上传**：支持按住 `Ctrl` 或 `Shift` 在资源管理器中多选文件、文件夹，右键选择上传，扩展会自动合并传入所有绝对路径，由 CLI 一次性打包部署。
+- **实时日志输出**：部署启动后会自动打开底部「**输出 (Output)**」面板并切换到 **`zp-cli`** 通道，流式打印 SSH 连接、文件传输与远程解压日志。
+- **动态服务器感知**：新增或修改 `~/.zp-cli.json` 中的服务器后，**无需重新安装扩展**，下次点击「选择服务器上传...」时即时读取最新配置。
+
+---
+
+## WebStorm 外部工具集成
+
+支持在 WebStorm（及 IntelliJ IDEA、PhpStorm 等 JetBrains 系列 IDE）中注册外部工具（External Tools），提供右键部署能力。
+
+### 1. 安装与卸载
+
+```bash
+# 安装 WebStorm 集成（自动探测配置目录）
+zp-cli install webstorm
+
+# 若自动探测未找到，手动指定配置目录
+zp-cli install webstorm -d "C:\Users\<用户名>\AppData\Roaming\JetBrains\WebStorm2024.2"
+
+# 仅为每个服务器生成菜单，不生成"自动匹配"项
+zp-cli install webstorm --no-auto-match
+
+# 卸载
+zp-cli uninstall webstorm
+```
+
+> ⚠️ **重要提示（防覆盖机制）**：
+> WebStorm 的 External Tools 配置文件在 IDE 启动时加载进内存，**若在 WebStorm 运行期间写入配置，关闭 IDE 时可能会被内存数据覆盖**。
+> 因此，`zp-cli install webstorm` 默认会检测 WebStorm 是否处于运行中；**请先完全退出 WebStorm，再执行安装命令**（支持 `--force` 强制写入）。
+
+### 2. 生成的菜单说明
+
+安装后重启 WebStorm，右键项目视图中的文件/文件夹/空白处，展开 **External Tools** 即可看到：
+
+- **`zp-cli: 上传到 <别名>`** — 将选中的文件/文件夹部署到指定服务器
+- **`zp-cli: 上传当前目录到 <别名>`** — 将当前所在目录部署到指定服务器
+- **`zp-cli: 自动匹配上传`** — 自动根据 Git 映射匹配目标服务器部署
+
+部署输出会直接显示在 IDE 底部的 External Tools / Run 控制台面板中。
+
+---
+
+## Windows 资源管理器右键
+
+支持在 Windows 系统文件管理器中直接右键上传，免去手动打开命令行终端。安装需要管理员权限。
+
+```bash
+# 安装右键菜单（需管理员权限运行终端）
 zp-cli install menu
 
 # 卸载右键菜单
 zp-cli uninstall menu
 ```
 
-安装后可在以下位置看到「用 zp-cli 上传」菜单项：
+安装后可在文件、文件夹或空白处看到「**用 zp-cli 上传**」菜单项：
 
 | 右键位置 | 行为 |
 |---------|------|
-| 文件 | 上传该文件 |
+| 单个文件 | 上传该文件 |
 | 文件夹 | 上传该文件夹 |
-| 多选文件/文件夹 | 收集选中项，在一个终端中转换为一次 `zp-cli up ...` 命令执行 |
+| 多选文件/文件夹 | 自动排队合并为一个终端窗口，执行一次批量上传 |
 | 文件夹空白处 | 上传当前目录 `.` |
 
 多选上传时，右键脚本会先收集 Explorer 传入的路径，再转换为类似下面的命令执行：
@@ -245,41 +338,68 @@ zp-cli uninstall menu
 zp-cli up .\page\ .\js\
 ```
 
-> 注意：Windows 11 的新版右键菜单会折叠传统注册表菜单项，可能需要点击「显示更多选项」或按住 Shift 右键查看。
+> 💡 Windows 11 用户在点击右键后，需要点击「显示更多选项」或按住 `Shift` 再右键才能看到该菜单项。
 >
 > 右键脚本安装在 `~/.zp-cli/` 目录下，包括 `.cmd`、`.vbs`、`.ps1` 辅助脚本。
 
-### sync 命令详解
+---
 
-`sync` 命令用于管理 `~/.zp-cli.json` 配置文件的远程同步，方便在多台电脑间同步配置。
+## sync 命令详解
+
+`sync` 命令用于管理 `~/.zp-cli.json` 配置文件的远程同步，方便在多台电脑间同步部署配置。
 
 ```bash
-zp-cli sync <操作>
+zp-cli sync <操作> [历史文件名] [选项]
 ```
 
-| 操作 | 说明 |
-|------|------|
-| `push` | 推送本地配置到同步服务 |
-| `pull` | 从同步服务拉取配置覆盖本地（自动备份旧配置） |
-| `history` | 查看服务端历史版本列表 |
-| `restore <文件名>` | 恢复指定历史版本 |
+### 操作列表
+
+| 操作 | 说明 | 安全提示 |
+|------|------|----------|
+| `push` | 推送本地配置到同步服务覆盖服务端 | ⚠️ **需密码二次确认**，防止误覆盖远端团队配置 |
+| `pull` | 从同步服务拉取配置覆盖本地 | 自动在本地生成备份（`~/.zp-cli.json.bak-xxx`） |
+| `history` | 查看服务端历史备份版本列表 | 查看历史文件名、大小与提交时间 |
+| `restore <文件名>` | 将指定历史版本恢复为当前配置并下发到本地 | ⚠️ **需密码二次确认**，覆盖服务端与本地配置 |
+
+### 安全防护与密码确认
+
+为防止误操作导致团队配置丢失，从 v0.0.8 起，执行 **`push`** 和 **`restore`** 这类破坏性写操作时，终端会强制进行交互式密码确认：
+
+```bash
+zp-cli sync push
+# ⚠️  推送将覆盖同步服务端现有配置
+# ? 请输入同步服务 API 密码以确认: ********
+```
+
+**选项说明：**
+
+| 选项 | 简写 | 说明 |
+|------|------|------|
+| `--yes` | `-y` | 跳过交互式密码确认（直接校验配置文件中的密码后执行，适合脚本自动化使用） |
+| `--password <密码>` | `-p` | 直接通过命令行传入密码进行校验 |
 
 **使用示例：**
 
 ```bash
-# 推送配置
+# 1. 默认交互确认推送
 zp-cli sync push
-# 或使用简写
-zp-cli s push
 
-# 拉取配置
+# 2. 脚本/快捷跳过确认推送
+zp-cli sync push -y
+
+# 3. 从服务端拉取最新配置覆盖本地
+zp-cli sync pull
+# 简写
 zp-cli s pull
 
-# 查看历史版本
+# 4. 查看历史版本
 zp-cli s history
 
-# 恢复指定版本
-zp-cli s restore backup_20260710_120000.json
+# 5. 恢复指定历史版本（输入密码确认）
+zp-cli sync restore 20260902-180000.json
+
+# 6. 跳过确认恢复历史版本
+zp-cli sync restore 20260902-180000.json -y
 ```
 
 ---
@@ -599,7 +719,7 @@ zp-cli s restore backup_20260710_120000.json
 
 ### Q: Windows 上打包报错？
 
-**A:** v0.0.5 使用 npm `tar` 包进行跨平台打包，不依赖系统 `tar` 命令。请确认依赖已正确安装，可尝试重新执行 `npm install` 或重新全局安装 zp-cli。
+**A:** 使用 npm `tar` 包进行跨平台打包，不依赖系统 `tar` 命令。请确认依赖已正确安装，可尝试重新执行 `npm install` 或重新全局安装 zp-cli。
 
 ### Q: 如何查看当前配置？
 
@@ -608,6 +728,13 @@ zp-cli s restore backup_20260710_120000.json
 ### Q: 如何查看配置文件路径？
 
 **A:** 使用 `zp-cli config path` 命令。
+
+### Q: 在 VS Code 或 WebStorm 中右键为什么没有生效？
+
+**A:**
+
+- **VS Code**: 执行 `zp-cli install vscode` 后，在 VS Code 按 `Ctrl+Shift+P` 执行「开发人员: 重载窗口 (Reload Window)」即可立即生效。
+- **WebStorm**: External Tools 在 IDE 运行时不会热加载，请**完全退出 WebStorm 后再执行 `zp-cli install webstorm`**，重新打开 IDE 即可看到「External Tools → zp-cli: ...」菜单。
 
 ---
 
@@ -621,15 +748,22 @@ zp-cli/
 ├── lib/
 │   ├── commands/
 │   │   ├── init.js                 # 生成 demo 配置
-│   │   ├── upload.js               # 上传部署逻辑
-│   │   ├── install.js              # Windows 右键菜单安装/卸载
-│   │   └── sync.js                 # 配置同步服务命令
+│   │   ├── upload.js               # 上传部署逻辑（支持跨目录精确匹配 Git 仓库）
+│   │   ├── install.js              # Windows 资源管理器右键菜单安装/卸载
+│   │   ├── vscode.js               # VS Code 官方扩展安装/卸载
+│   │   ├── webstorm.js             # WebStorm External Tools 安装/卸载
+│   │   └── sync.js                 # 配置同步服务命令（带安全密码确认）
 │   ├── core/
 │   │   ├── configManager.js        # 配置读写与验证
 │   │   ├── gitHelper.js            # Git 仓库感知、URL 归一化、路径映射
 │   │   └── sshDeployer.js          # SSH 连接、打包、上传、解压
 │   └── utils/
 │       └── logger.js               # 终端彩色输出
+├── vscode-extension/               # VS Code 官方扩展源码与安装包
+│   ├── package.json                # 扩展配置、菜单与命令声明
+│   ├── extension.js                # 扩展运行逻辑（多选、QuickPick 选择服务器、Output 流式日志）
+│   ├── readme.md                   # 扩展说明文档
+│   └── zp-cli-vscode.vsix          # 打包好的离线安装包（固定命名，无版本号后缀）
 ├── backend/
 │   └── php/                        # 同步服务后端实现
 │       ├── api.php                 # API 入口
@@ -654,9 +788,13 @@ zp-cli/
 │  zp-cli up a.js b.js            一次上传多个文件              │
 │  zp-cli up ./dist -s hw         上传到指定服务器              │
 │  zp-cli up ./dist -r /var/www   上传到指定路径                │
-│  zp-cli install menu            安装 Windows 右键上传菜单     │
-│  zp-cli s push                  推送配置到同步服务            │
+│  zp-cli install vscode          安装 VS Code 官方右键扩展     │
+│  zp-cli install webstorm        安装 WebStorm 外部工具菜单    │
+│  zp-cli install menu            安装 Windows 资源管理器右键   │
+│  zp-cli s push                  推送配置（需输入密码二次确认）│
+│  zp-cli s push -y               跳过确认直接推送配置          │
 │  zp-cli s pull                  从同步服务拉取配置            │
+│  zp-cli s restore <file>        恢复历史配置（需密码确认）    │
 │  zp-cli c show                  查看当前配置                  │
 │  zp-cli c path                  查看配置文件路径              │
 └─────────────────────────────────────────────────────────────┘
@@ -675,6 +813,39 @@ zp-cli/
 ---
 
 ## 更新日志
+
+### v0.0.9 (2026-09-03)
+
+**构建与产物优化：**
+- 📦 **VS Code 扩展产物固定命名**：编译输出文件统一为 `zp-cli-vscode.vsix`（不再附加版本号后缀），避免每次版本升级产生文件重命名冗余与旧包残留。
+- 🛠️ **安装命令自动适配**：`zp-cli install vscode` 自动寻找并安装固定命名的 `zp-cli-vscode.vsix`。
+
+### v0.0.8 (2026-09-02)
+
+**安全与稳定性改进：**
+- 🔒 **配置同步密码二次确认**：`zp-cli sync push` 与 `zp-cli sync restore` 增加交互式密码确认机制，防止误操作覆盖服务端与本地配置。支持 `-y, --yes` 参数跳过确认，支持 `-p, --password <密码>` 参数直接指定。
+- 📦 **VS Code 扩展升级**：扩展同步更新至 0.0.8，`package.json` 提供 `"build:vscode"` 便捷打包脚本。
+
+### v0.0.7 (2026-09-02)
+
+**功能新增：**
+
+- 💻 **VS Code 官方扩展支持**：
+  - 新增 `zp-cli install vscode` / `zp-cli uninstall vscode` 一键静默安装/卸载命令。
+  - 支持资源管理器多选/单选文件、文件夹右键批量上传。
+  - 支持原生顶部下拉弹窗（QuickPick）动态选择目标服务器（实时读取配置，增删服务器免重装）。
+  - 支持在 VS Code 底部「输出 (Output)」面板切换到 `zp-cli` 查看流式上传与解压日志。
+- 🛠️ **WebStorm 外部工具集成**：
+  - 新增 `zp-cli install webstorm` / `zp-cli uninstall webstorm`。
+  - 自动探测 WebStorm 实际配置目录（支持探测 Toolbox 的 `-Didea.config.path` 参数与新版 `toolSet` XML schema）。
+  - 按服务器生成右键子菜单与自动匹配上传项。
+- 🔍 **跨目录 Git 仓库智能感知**：
+  - 重构 `gitHelper.js` 与 `upload.js`，支持从任意工作目录下精准探测传入文件所在的真实 Git 根目录，彻底解决在不同项目路径下调用时的"不在 Git 仓库内"误判问题。
+
+### v0.0.6 (2026-07-27)
+
+**问题修复：**
+- 修复 `subdirectoryMappings` 直接传根目录时（如 `dist`），因 `relativePath` 为空导致解压到远程目标父目录的问题。使用 `--strip-components=1` 保证直接解压到 `remoteBase`。
 
 ### v0.0.5 (2026-07-17)
 
@@ -708,4 +879,4 @@ zp-cli/
 
 ---
 
-*文档更新日期: 2026-07-17*
+*文档更新日期: 2026-09-03*
