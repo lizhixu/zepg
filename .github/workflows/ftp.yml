@@ -41,7 +41,7 @@ jobs:
           pnpm run docs:build
         # 同步到又拍云
       - name: Deploy ftp
-        uses: airvzxf/ftp-deployment-action@v2.11.1
+        uses: airvzxf/ftp-deployment-action@v2.6.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
