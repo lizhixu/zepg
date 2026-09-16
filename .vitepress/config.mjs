@@ -1,4 +1,5 @@
 import {defineConfig} from 'vitepress'
+import { MCPPlugin } from 'vitepress-plugin-mcp'
 
 // https://vitepress.dev/reference  /site-config
 export default defineConfig({
@@ -17,7 +18,8 @@ export default defineConfig({
             text: 'Edit this page on GitHub'
         },
         search: {
-          provider: 'local'
+          provider: 'local',
+          options: {}
         },
         outline: {
             level: [2, 4],
@@ -80,5 +82,8 @@ export default defineConfig({
         socialLinks: [
             {icon: 'github', link: 'https://github.com/lizhixu/zepg'}
         ]
+    },
+    vite: {
+        plugins: [MCPPlugin({ port: 4000 })]
     }
 })

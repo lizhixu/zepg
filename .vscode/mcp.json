@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "zepg-docs-local": {
+      "command": "node",
+      "args": ["scripts/mcp-stdio.mjs"]
+    },
+    "zepg-docs-vercel": {
+      "type": "sse",
+      "url": "https://zepg.vercel.app/api/mcp"
+    }
+  }
+}
