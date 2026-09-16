@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pnpm run docs:build",
+    "vercel-build": "pnpm run docs:build",
     "docs:dev": "vitepress dev",
     "docs:build": "node scripts/build-index.mjs && vitepress build",
     "mcp:stdio": "node scripts/mcp-stdio.mjs",
