@@ -1,5 +1,4 @@
 import {defineConfig} from 'vitepress'
-import { MCPPlugin } from 'vitepress-plugin-mcp'
 
 // https://vitepress.dev/reference  /site-config
 export default defineConfig({
@@ -82,8 +81,5 @@ export default defineConfig({
         socialLinks: [
             {icon: 'github', link: 'https://github.com/lizhixu/zepg'}
         ]
-    },
-    vite: {
-        plugins: [MCPPlugin({ port: 4000 })]
     }
 })
