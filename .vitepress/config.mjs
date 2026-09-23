@@ -1,13 +1,8 @@
 import {defineConfig} from 'vitepress'
 
-const rawBase = (process.env.BASE_PATH || '').trim()
-const base = !rawBase || rawBase === '/'
-  ? '/'
-  : `${rawBase.startsWith('/') ? '' : '/'}${rawBase}${rawBase.endsWith('/') ? '' : '/'}`
-
-// https://vitepress.dev/reference  /site-config
+// https://vitepress.dev/reference/site-config
 export default defineConfig({
-    base,
+    base: '/',
     title: "ZEPG",
     titleTemplate: "知识库",
     description: "知识库",
